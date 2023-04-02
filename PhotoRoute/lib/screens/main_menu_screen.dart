@@ -78,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
   /// This function is executed when user presses "Trip history" button and it will
   /// take you to the "Trip history" screen
   void _navigateTripHistoryScreen() {
-    executeBackgroundTask('ovo je parametar iz fluttera');
+    //executeBackgroundTask('ovo je parametar iz fluttera');
     Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => TripHistoryScreen())).then(_onGoBack);

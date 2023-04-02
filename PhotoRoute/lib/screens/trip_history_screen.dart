@@ -210,7 +210,7 @@ class _TripHistoryScreen extends State<TripHistoryScreen> {
               _tripSelectMode = false;
             });
 
-            _uploadSelectionHandler(ids);
+            //_uploadSelectionHandler(ids);
           }
         )
       );
