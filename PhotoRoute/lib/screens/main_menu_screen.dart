@@ -4,11 +4,9 @@ import 'dart:io';
 import 'dart:isolate';
 
 import 'package:flutter/material.dart';
-import 'package:photo_route/common_modules/background_process/work_manager.dart';
 import 'package:photo_route/common_modules/shared_preferences/shared_preferences_handler.dart';
 import 'package:photo_route/database_mgr/trip_descripton_db.dart';
 import 'package:photo_route/screens/trip_history_screen.dart';
-
 import '../common_modules/callbacks/trip_actions.dart';
 import 'new_trip_screen.dart';
 
@@ -18,9 +16,6 @@ class MotoRoute extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    //WorkManager wm = WorkManager();
-    //wm.executeBackgroundTask('ovo je parametar iz fluttera');
-    //executeBackgroundTask('ovo je parametar iz fluttera');
     return MaterialApp(
       title: 'Moto Route',
       theme: ThemeData(
@@ -78,7 +73,6 @@ class _HomeScreenState extends State<HomeScreen> {
   /// This function is executed when user presses "Trip history" button and it will
   /// take you to the "Trip history" screen
   void _navigateTripHistoryScreen() {
-    //executeBackgroundTask('ovo je parametar iz fluttera');
     Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => TripHistoryScreen())).then(_onGoBack);
