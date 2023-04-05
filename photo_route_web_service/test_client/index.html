@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Example</title>
+    </head>
+    <body>
+		<script>
+			var url = "https://localhost:7081/WeatherForecast/testPostRequest";
+		
+
+			var xhr = new XMLHttpRequest();
+			xhr.open("POST", url);
+
+			xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+			xhr.setRequestHeader("Accept", "application/json");
+			xhr.setRequestHeader("Content-Type", "application/json");
+			
+
+			xhr.onreadystatechange = function () {
+			if (xhr.readyState === 4) {
+				console.log(xhr.responseText);
+			}};
+
+			var data = `{
+				"param": "Jason Sweet",
+			}`;
+
+			xhr.send(data);
+		</script>
+        <p>This is an example of a simple HTML page with one paragraph.</p>
+    </body>
+</html>
