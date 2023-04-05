@@ -151,7 +151,7 @@ class _TripHistoryScreen extends State<TripHistoryScreen> {
   void _uploadSelectionHandler(List<int> ids) {
     //final String url = 'https://localhost:7081/WeatherForecast/testPostRequest?param=mob_poslao'; // on device
     //final String url = 'https://localhost:7081/WeatherForecast/testPostRequestBody';
-    final String url = 'https://localhost:7081/DatabaseManager/UploadImage';
+    final String url = 'https://192.168.1.80:7081/DatabaseManager/UploadImage';
     //final String url = 'http://10.0.2.2:7081/WeatherForecast/testPostRequest'; // on emulator
     //final String url = 'https://10.0.2.2:4040/';
     //final String url = 'https://localhost:8081/';
@@ -210,7 +210,7 @@ class _TripHistoryScreen extends State<TripHistoryScreen> {
               _tripSelectMode = false;
             });
 
-            //_uploadSelectionHandler(ids);
+            _uploadSelectionHandler(ids);
           }
         )
       );

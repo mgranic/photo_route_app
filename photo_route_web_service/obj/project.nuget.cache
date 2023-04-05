@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "x5tEu+1xVYQbmE94XMcrN0UNVKRxDzQyGsayuzaPKKTiQzdJ319jT90w3HiiFSes+ADzkwauDqTtmqmMicBIew==",
+  "dgSpecHash": "dXbRWqiID0pFuX0mYE1jAVBCkVhUmKwE3jF6SixcK1aeRZNZDZ0OwtVLVmPQTDlptaCO07SCmdKP1tcXt/eOfQ==",
   "success": true,
   "projectFilePath": "/Users/mategranic/Documents/programming_projects/full_projects/photo_route_app/photo_route_web_service/photo_route_web_service.csproj",
   "expectedPackageFiles": [
@@ -9,10 +9,7 @@
     "/Users/mategranic/.nuget/packages/swashbuckle.aspnetcore/6.2.3/swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
     "/Users/mategranic/.nuget/packages/swashbuckle.aspnetcore.swagger/6.2.3/swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
     "/Users/mategranic/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.2.3/swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
-    "/Users/mategranic/.nuget/packages/swashbuckle.aspnetcore.swaggerui/6.2.3/swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512",
-    "/Users/mategranic/.nuget/packages/microsoft.netcore.app.ref/6.0.15/microsoft.netcore.app.ref.6.0.15.nupkg.sha512",
-    "/Users/mategranic/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.15/microsoft.aspnetcore.app.ref.6.0.15.nupkg.sha512",
-    "/Users/mategranic/.nuget/packages/microsoft.netcore.app.host.osx-arm64/6.0.15/microsoft.netcore.app.host.osx-arm64.6.0.15.nupkg.sha512"
+    "/Users/mategranic/.nuget/packages/swashbuckle.aspnetcore.swaggerui/6.2.3/swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512"
   ],
   "logs": []
 }
