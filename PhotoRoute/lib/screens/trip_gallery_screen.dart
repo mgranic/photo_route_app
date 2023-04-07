@@ -77,6 +77,7 @@ class _TripGalleryScreen extends State<TripGalleryScreen> {
       for (var i = 0; i < recentAssets.length; i++) {
         if (recentAssets[i].createDtSecond! <= ((_tripEnd.millisecondsSinceEpoch/1000).ceil() + (_tripEnd.timeZoneOffset.inMilliseconds/1000).ceil()) &&
             recentAssets[i].createDtSecond! >= ((_tripStart.millisecondsSinceEpoch/1000).floor() + (_tripStart.timeZoneOffset.inMilliseconds/1000).floor())) {
+
           assets.add(recentAssets[i]);
         }
       }

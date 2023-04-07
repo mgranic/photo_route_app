@@ -37,9 +37,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
 
   late Future<ElevatedButton> _button;
-  /*_HomeScreenState() {
-    _button = _renderActionButton();
-  }*/
 
   @override
   Widget build(BuildContext context) {
