@@ -20,11 +20,14 @@ public class DatabaseManagerController : Controller
     [HttpPost("UploadImage2")]
     [Produces("application/json")]
     [DisableRequestSizeLimit]
-    public ActionResult<string>  UploadImage2([FromForm(Name = "files")] List<IFormFile> files) //[FromBody] ImageModel img
+    public ActionResult<string>  UploadImage2([FromForm(Name = "files")] List<IFormFile> files,
+                                              [FromForm] String folderName) //[FromBody] ImageModel img
     {
         Console.WriteLine("pozvana je UploadImage2");
+        Console.WriteLine(folderName);
 
-        string uploads = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
+        string uploads = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+        //string uploads = Path.Combine(Directory.GetCurrentDirectory(), folderName["folderName"]);
         //Create directory if it doesn't exist 
         Directory.CreateDirectory(uploads);
 

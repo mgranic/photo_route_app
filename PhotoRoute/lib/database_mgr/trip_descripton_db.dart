@@ -96,6 +96,43 @@ class TripDescriptionDb extends SqliteDbHandler {
     return tripDescList;
   }
 
+  /// select all from trip_description table and return the data in a list
+  /// of TripDescriptionModel type
+  /// Method returns all finished trips that have specific ID
+  /// There is a possibility this method throws an error (database table empty) and
+  /// it needs to be handled by the caller
+  Future<List<TripDescriptionModel>> getFinishedTripsById(List<int> ids) async {
+    String s = '';
+    // create comma separated string containing IDs
+    for(var el in ids) {
+      s += '$el,';
+    }
+    s = s.substring(0, s.length - 1);
+    // get data from database
+    var tripDescriptionData = await selectFromTableConditional('trip_description',
+                                    '*',
+                                    'end_time IS NOT NULL AND id IN ($s)');
+    List<TripDescriptionModel> tripDescList =  [];
+
+    try {
+      // iterate database data and populate list with it
+      for (Map row in tripDescriptionData) {
+        //print('start_time = ${DateTime.parse(row['start_time']).millisecondsSinceEpoch/100000}');
+        // each list entry is one row in database table
+        tripDescList.add(TripDescriptionModel(row['id'],
+            row['name'],
+            DateTime.parse(row['start_time']),
+            DateTime.parse(row['end_time'])));
+      }
+    } catch (e) {
+      rethrow;
+    }
+
+
+    // return the list containing database data
+    return tripDescList;
+  }
+
   /// delete all from trip_description table where IDs match
   Future<void> deleteFromTripDescriptionById(List<int> ids) async {
     String s = '';

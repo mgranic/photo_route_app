@@ -96,7 +96,7 @@ class _TripHistoryScreen extends State<TripHistoryScreen> {
     // if selection mode is enabled every tap on list item will add the list to the selection
     if (_tripSelectMode == true) {
       setState(() {
-        // invert selection flag (true or false)
+        // invert selection flag (true or false -- select/deselect)
         _selectList[dbId] = !_selectList[dbId]! ;
       });
     } else {
@@ -122,7 +122,7 @@ class _TripHistoryScreen extends State<TripHistoryScreen> {
   /// Once you tap and hold the trip menu with "select more", "delete" and
   /// "upload" should appear
   void _tripLongPressHandler(int index, String? name, int? dbId, DateTime? start, DateTime? end) {
-    _fetchAssets(start, end);
+    //_fetchAssets(start, end);
 
     setState(() {
       // invert selection flag (true or false)
@@ -154,14 +154,26 @@ class _TripHistoryScreen extends State<TripHistoryScreen> {
 
   /// Upload selected trips to the server
   /// // ids is list containing all trip IDs from DB
-  void _uploadSelectionHandler(List<int> ids) {
+  void _uploadSelectionHandler(List<int> ids) async {
     //final String url = 'https://localhost:7081/WeatherForecast/testPostRequest?param=mob_poslao'; // on device
     //final String url = 'https://localhost:7081/WeatherForecast/testPostRequestBody';
-    final String url = 'https://192.168.2.146:7081/DatabaseManager/UploadImage'; //'https://192.168.1.80:7081/DatabaseManager/UploadImage';
+    final String url = 'https://192.168.2.146:7081/DatabaseManager/UploadImage2'; //'https://192.168.1.80:7081/DatabaseManager/UploadImage';
     //final String url = 'http://10.0.2.2:7081/WeatherForecast/testPostRequest'; // on emulator
     //final String url = 'https://10.0.2.2:4040/';
     //final String url = 'https://localhost:8081/';
-    post(
+
+    TripDescriptionDb uploadDbHandler = TripDescriptionDb();
+    List<TripDescriptionModel> uploadTripHistory = await uploadDbHandler.getFinishedTripsById(ids);
+    //uploadTripHistory.then((tripHist) {
+      //print('pozvan je then handler');
+      for (TripDescriptionModel tdm in uploadTripHistory) {
+        print('id je ${tdm.id}');
+        _sendFilesToServer(tdm!.name!, tdm.start_time, tdm.end_time);
+      }
+    //});
+
+
+    /*post(
       Uri.parse(url),
       headers: <String, String>{
         'Content-Type': 'application/json'
@@ -176,20 +188,25 @@ class _TripHistoryScreen extends State<TripHistoryScreen> {
     })
         .timeout(Duration(seconds: 2), onTimeout: () {
       //print(' HTTP request timeout');
-    });
+    });*/
 
     //post(Uri.parse('${url}isAlive'), body: {"param1": 'parm1'});
   }
 
-  ///  function that fetches the assets, and updates the state
-  _fetchAssets(DateTime? tripStart, DateTime? tripEnd) async {
-    final String url = 'https://192.168.2.146:7081/DatabaseManager/UploadImage2';
-    MultipartRequest request;
+  ///  Get the images that were created between tripStart and tripEnd
+  ///  time
+  ///  albumName is the name of the album that is being uplaoded
+  ///  Images are then sent to the server to be stored
+  _sendFilesToServer(String albumName, DateTime? tripStart, DateTime? tripEnd) async {
+    final String url = 'https://192.168.2.99:7081/DatabaseManager/UploadImage2';
+    //MultipartRequest request;
     Uri uri = Uri.parse(url);
     // Set onlyAll to true, to fetch only the 'Recent' album
     // which contains all the photos/videos in the storage
     final albums = await PhotoManager.getAssetPathList(onlyAll: true);
     final recentAlbum = albums.first;
+
+    MultipartRequest request = MultipartRequest('POST', uri);
 
     // Now that we got the album, fetch all the assets it contains
     final recentAssets = await recentAlbum.getAssetListRange(
@@ -199,24 +216,30 @@ class _TripHistoryScreen extends State<TripHistoryScreen> {
     );
 
 
+      // TODO: mategr create dummy file with name equal to album name to the request first
+      // TODO: mategr this will be used to create folder with album name
+    //Map<String, String> folderName = Map<String, String>();
+    //folderName["folderName"] = "moj prvi album";
+    //request.fields.addAll(folderName);
+    request.fields["folderName"] = albumName;
+    print(request.fields["folderName"]);
       for (var i = 0; i < recentAssets.length; i++) {
         if (recentAssets[i].createDtSecond! <= ((tripEnd!.millisecondsSinceEpoch/1000).ceil() + (tripEnd!.timeZoneOffset.inMilliseconds/1000).ceil()) &&
             recentAssets[i].createDtSecond! >= ((tripStart!.millisecondsSinceEpoch/1000).floor() + (tripStart!.timeZoneOffset.inMilliseconds/1000).floor())) {
           // TODO: mategr use this file path to send the image to the server as described here:
+          var imgFile = await recentAssets[i].file;
+          request.files.add(await MultipartFile.fromPath('files', imgFile!.path));
           // https://medium.com/geekculture/flutter-how-to-upload-photos-taken-from-the-camera-and-other-files-via-http-386d04218e02
-          recentAssets[i].file.then((imageFile) async {
-            print('************** ${imageFile?.path} ************* ${imageFile?.uri} **********');
-            request = MultipartRequest('POST', uri);
-            request.files.add(await MultipartFile.fromPath('files', imageFile!.path));
-            StreamedResponse response = await request.send();
-          });
-
-
-
-          //http.StreamedResponse response = await request.send();
-          break;
+         // recentAssets[i].file.then((imageFile) async {
+         //   print('************** ${imageFile?.path} ************* ${imageFile?.uri} **********');
+         //   MultipartRequest request = MultipartRequest('POST', uri);
+         //   request.files.add(await MultipartFile.fromPath('files', imageFile!.path));
+         //   StreamedResponse response = await request.send();
+         // });
         }
+        //break;
       }
+      StreamedResponse response = await request.send();
   }
 
   /// deselect all selected trips from the list and hide action menu
