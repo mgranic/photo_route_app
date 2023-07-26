@@ -18,7 +18,7 @@ PODS:
 DEPENDENCIES:
   - Flutter (from `Flutter`)
   - photo_manager (from `.symlinks/plugins/photo_manager/ios`)
-  - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/ios`)
+  - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
   - video_player_avfoundation (from `.symlinks/plugins/video_player_avfoundation/ios`)
 
@@ -32,7 +32,7 @@ EXTERNAL SOURCES:
   photo_manager:
     :path: ".symlinks/plugins/photo_manager/ios"
   shared_preferences_foundation:
-    :path: ".symlinks/plugins/shared_preferences_foundation/ios"
+    :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
   sqflite:
     :path: ".symlinks/plugins/sqflite/ios"
   video_player_avfoundation:

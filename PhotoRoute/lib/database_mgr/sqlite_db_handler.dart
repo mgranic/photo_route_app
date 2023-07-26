@@ -77,7 +77,6 @@ class SqliteDbHandler {
   }
 
   Future<int> updateTable(String tableName, String set, String where) async {
-    //print('''INSERT INTO $tableName ($columns) VALUES ($values);''');
     _database ??= await _createDatabase();
     return await _database!
         .rawUpdate('''UPDATE $tableName SET $set WHERE $where;''');
@@ -101,7 +100,6 @@ class SqliteDbHandler {
 
   /// select rows from table without condition. Select specified columns (can be *)
   Future<List<Map>> selectFromTable(String tableName, String columns) async {
-    //print('''SELECT $columns FROM $tableName;''');
     _database ??= await _createDatabase();
     return await _database!.rawQuery('''SELECT $columns FROM $tableName;''');
   }

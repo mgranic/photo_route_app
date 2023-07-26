@@ -117,7 +117,6 @@ class TripDescriptionDb extends SqliteDbHandler {
     try {
       // iterate database data and populate list with it
       for (Map row in tripDescriptionData) {
-        //print('start_time = ${DateTime.parse(row['start_time']).millisecondsSinceEpoch/100000}');
         // each list entry is one row in database table
         tripDescList.add(TripDescriptionModel(row['id'],
             row['name'],

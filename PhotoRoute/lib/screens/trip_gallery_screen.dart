@@ -19,7 +19,6 @@ class TripGalleryScreen  extends StatefulWidget {
   
 }
 
-// https://dev.to/aouahib/build-a-flutter-gallery-to-display-all-the-photos-and-videos-in-your-phone-pb6
 class _TripGalleryScreen extends State<TripGalleryScreen> {
   late int _id;
   late DateTime _tripStart;
