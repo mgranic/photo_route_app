@@ -5,7 +5,7 @@ using photo_route_web_service.Models;
 using System.Text.Encodings.Web;
 
 namespace photo_route_web_service.Controllers;
-
+/// chrome://inspect/#devices
 [ApiController]
 [Route("[controller]")]
 public class DatabaseManagerController : Controller
