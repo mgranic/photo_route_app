@@ -11,9 +11,8 @@ namespace photo_route_web_service.Controllers;
 public class DatabaseManagerController : Controller
 {
     [HttpPost("UploadImage")]
-    public String UploadImage([FromBody] ImageModel img) //[FromBody] ImageModel img
+    public String UploadImage([FromBody] ImageModel img)
     {
-       // return "neki testni kurac";
         Console.WriteLine(img.name);
         return "Image name is " + img.name;
     }
@@ -21,13 +20,12 @@ public class DatabaseManagerController : Controller
     [Produces("application/json")]
     [DisableRequestSizeLimit]
     public ActionResult<string>  UploadImage2([FromForm(Name = "files")] List<IFormFile> files,
-                                              [FromForm] String folderName) //[FromBody] ImageModel img
+                                              [FromForm] String folderName) 
     {
-        Console.WriteLine("pozvana je UploadImage2");
-        Console.WriteLine(folderName);
+        //Console.WriteLine("pozvana je UploadImage2");
+        //Console.WriteLine(folderName);
 
         string uploads = Path.Combine(Directory.GetCurrentDirectory(), folderName);
-        //string uploads = Path.Combine(Directory.GetCurrentDirectory(), folderName["folderName"]);
         //Create directory if it doesn't exist 
         Directory.CreateDirectory(uploads);
 
@@ -35,9 +33,9 @@ public class DatabaseManagerController : Controller
             List<string> data = new List<string>();
             foreach(var file in files) {
                 data.Add($"Filename: {file.FileName} || Type: {file.ContentType}");
-                Console.WriteLine(file.FileName);
-                Console.WriteLine(file.Length);
-                Console.WriteLine(Directory.GetCurrentDirectory());
+                //Console.WriteLine(file.FileName);
+                //Console.WriteLine(file.Length);
+                //Console.WriteLine(Directory.GetCurrentDirectory());
                 if (file.Length > 0)
                 {
                     string filePath = Path.Combine(uploads, file.FileName);
