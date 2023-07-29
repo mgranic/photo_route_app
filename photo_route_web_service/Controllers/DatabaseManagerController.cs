@@ -22,27 +22,20 @@ public class DatabaseManagerController : Controller
     public ActionResult<string>  UploadImage2([FromForm(Name = "files")] List<IFormFile> files,
                                               [FromForm] String folderName) 
     {
-        //Console.WriteLine("pozvana je UploadImage2");
-        //Console.WriteLine(folderName);
-
         // create uploads directory which will contain all uploaded albums
         string uploadsDir = Path.Combine(Directory.GetCurrentDirectory(), "uploads");
         //Create directory if it doesn't exist 
         Directory.CreateDirectory(uploadsDir);
-        Console.WriteLine(uploadsDir);
 
+        // create folder for each album that is being uploaded within uploads folder
         string uploadedAlbum = Path.Combine(uploadsDir, folderName);
         //Create directory if it doesn't exist 
         Directory.CreateDirectory(uploadedAlbum);
-        Console.WriteLine(uploadedAlbum);
 
         if(files.Count == 0) return BadRequest();
             List<string> data = new List<string>();
             foreach(var file in files) {
                 data.Add($"Filename: {file.FileName} || Type: {file.ContentType}");
-                //Console.WriteLine(file.FileName);
-                //Console.WriteLine(file.Length);
-                //Console.WriteLine(Directory.GetCurrentDirectory());
                 if (file.Length > 0)
                 {
                     string filePath = Path.Combine(uploadedAlbum, file.FileName);
