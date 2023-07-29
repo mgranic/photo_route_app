@@ -25,9 +25,16 @@ public class DatabaseManagerController : Controller
         //Console.WriteLine("pozvana je UploadImage2");
         //Console.WriteLine(folderName);
 
-        string uploads = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+        // create uploads directory which will contain all uploaded albums
+        string uploadsDir = Path.Combine(Directory.GetCurrentDirectory(), "uploads");
         //Create directory if it doesn't exist 
-        Directory.CreateDirectory(uploads);
+        Directory.CreateDirectory(uploadsDir);
+        Console.WriteLine(uploadsDir);
+
+        string uploadedAlbum = Path.Combine(uploadsDir, folderName);
+        //Create directory if it doesn't exist 
+        Directory.CreateDirectory(uploadedAlbum);
+        Console.WriteLine(uploadedAlbum);
 
         if(files.Count == 0) return BadRequest();
             List<string> data = new List<string>();
@@ -38,7 +45,7 @@ public class DatabaseManagerController : Controller
                 //Console.WriteLine(Directory.GetCurrentDirectory());
                 if (file.Length > 0)
                 {
-                    string filePath = Path.Combine(uploads, file.FileName);
+                    string filePath = Path.Combine(uploadedAlbum, file.FileName);
                     using (Stream fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
                     {
                         file.CopyTo(fileStream);
