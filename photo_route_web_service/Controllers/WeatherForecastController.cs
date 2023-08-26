@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace photo_route_web_service.Controllers;
 
+// this is test controller, not used for actuall application functionality
 [ApiController]
 [Route("[controller]")]
 public class WeatherForecastController : ControllerBase
