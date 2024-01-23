@@ -32,5 +32,8 @@ The idea came to me while doing motorcycle trips so that's why sometimes in the 
 ### Trip history (list of finished trips/photo albums)
 ![PhotoRoute screenshot](resources/trip_history.jpg "List of trips")
 
+### Trip gallery (photo gallery)
+![PhotoRoute screenshot](resources/trip_gallery.jpg "List of photos")
+
 ### Trip history menu (upload/delete albums)
 ![PhotoRoute screenshot](resources/upload_delete_album.jpg "Upload/delete trips")
